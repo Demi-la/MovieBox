@@ -104,20 +104,20 @@ const MovieCard = props => {
                   </Box>
                   <Box position={'absolute'} bottom={'2rem'}>
                     <Text
-                      data-testid="movie-title"
-                      fontSize={'1.125rem'}
-                      fontWeight={'700'}
-                      color={' var(--gray-900, #111827)'}
-                    >
-                      {movie?.title}
-                    </Text>
-                    <Text
                       data-testid="movie-release-date"
                       fontSize={'0.75rem'}
                       fontWeight={'700'}
                       color={' var(--gray-400, #9CA3AF)'}
                     >
                       {movie?.release_date}
+                    </Text>
+                    <Text
+                      data-testid="movie-title"
+                      fontSize={'1.125rem'}
+                      fontWeight={'700'}
+                      color={' var(--gray-900, #111827)'}
+                    >
+                      {movie?.title}
                     </Text>
                   </Box>
                 </Box>
