@@ -1,39 +1,19 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { ChakraProvider, Box, theme } from '@chakra-ui/react';
+import Home from './component/home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MovieDetails from './component/movieDetails';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
+      <Box fontFamily={"'DM Sans', sans-serif"}>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/movies/:id" element={<MovieDetails />} />
+          </Routes>
+        </Router>
       </Box>
     </ChakraProvider>
   );
