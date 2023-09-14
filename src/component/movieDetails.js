@@ -107,6 +107,7 @@ function MovieDetails() {
                 w={'10.625rem'}
                 h={'13.125rem'}
                 p={'1rem'}
+                ml={'-0.2rem'}
                 mr={'1rem'}
               >
                 <Text
