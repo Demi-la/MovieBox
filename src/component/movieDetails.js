@@ -12,27 +12,34 @@ function MovieDetails() {
   const { id } = useParams();
 
   const [movieDetails, setMovieDetails] = useState(null);
-useEffect(() => {
-  fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=43c1cca3df9cf881cd13dcab89304620`
-  )
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('No Network');
-      }
-      return response.json();
-    })
-    .then(data => {
-      setMovieDetails(data);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-}, [id]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=43c1cca3df9cf881cd13dcab89304620`
+    )
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No Network');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setMovieDetails(data);
+      })
+      // .catch(error => {
+      //   console.error('Error fetching data:', error);
+      // });
+      .catch(error => {
+        setError('Error fetching data: ' + error.message);
+      });
+  }, [id]);
 
-if (!movieDetails) {
-  return <div>Loading...</div>;
-}
+  if (!movieDetails) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   const { poster_path, title, release_date, overview, runtime } = movieDetails;
   const utcReleaseDate = new Date(release_date)
@@ -100,7 +107,7 @@ if (!movieDetails) {
                 w={'10.625rem'}
                 h={'13.125rem'}
                 p={'1rem'}
-                ml={'0'}
+                mr={'1rem'}
               >
                 <Text
                   fontSize={'0.9375rem'}
@@ -169,7 +176,7 @@ if (!movieDetails) {
               {utcReleaseDate}
             </Text>
             <Text data-testid="movie-runtime" mt={'1rem'}>
-              {runtime} Minutes
+              {runtime}
             </Text>
 
             <Text

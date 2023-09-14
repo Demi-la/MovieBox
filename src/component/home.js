@@ -7,14 +7,30 @@ import Footer from './footer';
 function Home() {
   const [moviesLists, setMoviesLists] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const getMovie = () => {
+    setIsLoading(true);
     fetch(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=43c1cca3df9cf881cd13dcab89304620`
     )
-      .then(res => res.json())
-      .then(json => setMoviesLists(json.results.slice(0, 10)))
-      .catch(error => console.error('Error fetching data:', error));
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return res.json();
+      })
+      .then(json => {
+        setMoviesLists(json.results.slice(0, 10));
+        setError(null);
+      })
+      .catch(error => {
+        setError('Error fetching data: ' + error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -42,6 +58,13 @@ function Home() {
     }, 100);
     return () => clearTimeout(timer);
   }, [searchValue]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <>
