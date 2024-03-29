@@ -7,12 +7,14 @@ import { AiFillHeart } from 'react-icons/ai';
 
 const MovieCard = props => {
   const [favoritesMap, setFavoritesMap] = useState({});
+ const { error } = props;
 
   const toggleFavorite = movieId => {
     const newFavoritesMap = { ...favoritesMap };
     newFavoritesMap[movieId] = !newFavoritesMap[movieId];
     setFavoritesMap(newFavoritesMap);
   };
+  
   return (
     <>
       <Box position={'relative'}>

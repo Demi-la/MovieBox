@@ -22,7 +22,7 @@ function Home() {
         return res.json();
       })
       .then(json => {
-        setMoviesLists(json.results.slice(0, 10));
+        setMoviesLists(json.results.slice(0, 20));
         setError(null);
       })
       .catch(error => {
@@ -43,10 +43,12 @@ function Home() {
         const filterMovie = data.results.filter(movie =>
           movie.title.toLowerCase().includes(searchValue.toLowerCase())
         );
-        setMoviesLists(filterMovie);
-        console.log(filterMovie);
+        
+          setMoviesLists(filterMovie);
+          // console.log(filterMovie);
+         
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     const timer = setTimeout(() => {
@@ -71,7 +73,7 @@ function Home() {
       <Box>
         <Header searchValue={searchValue} setSearchValue={setSearchValue} />
 
-        <MovieCard moviesLists={moviesLists} />
+        <MovieCard moviesLists={moviesLists}/>
 
         <Footer />
       </Box>

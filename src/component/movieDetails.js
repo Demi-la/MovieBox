@@ -160,7 +160,7 @@ function MovieDetails() {
             <Image
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt="favorites"
-              height={'28rem'}
+              height={'35rem'}
               width={{ base: '100%', lg: '90%' }}
               borderRadius={{ base: '0', lg: '1.25rem' }}
               data-testid="movie-poster"
@@ -174,10 +174,10 @@ function MovieDetails() {
               {title}
             </Text>
             <Text data-testid="movie-release-date" mt={'1rem'}>
-              {utcReleaseDate}
+              Released Date: {utcReleaseDate}
             </Text>
             <Text data-testid="movie-runtime" mt={'1rem'}>
-              {runtime}
+             Runtime: {runtime}
             </Text>
 
             <Text
